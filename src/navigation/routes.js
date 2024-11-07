@@ -6,6 +6,8 @@ export const routes = {
   LOGIN: 'Login',
   SINGUP: 'SingUp',
   HOME: 'Home',
+  CONTINENT_PAGE:'ContinentPage',
+  COUNTRY_DETAIL:'CountryDetail',
   FAVORITIES:'Favorities',
   CHATROOMS:'ChatRooms'
 };
