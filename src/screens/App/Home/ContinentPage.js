@@ -66,20 +66,8 @@ const ContinentPage = ({route, navigation}) => {
       <TopMenu
         title={continent.continent}
         onPressLeft={() => navigation.goBack()}
-
-
       />
 
-      {/*  <View style={styles.headerContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.button}
-          activeOpacity={0.8}>
-          <BackArrow width={24} height={24} />
-        </TouchableOpacity>
-
-        <Text style={styles.headerText}>{continent.continent}</Text>
-      </View> */}
       <ScrollView>{continent && <Countries />}</ScrollView>
     </SafeAreaView>
   );

@@ -35,6 +35,7 @@ const AppNavigator = () => {
         tabBarStyle: {
           backgroundColor: '#6a5acd',
           borderTopWidth: 1,
+          paddingTop:5
         },
 
         tabBarIcon: ({focused}) => {

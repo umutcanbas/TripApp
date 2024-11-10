@@ -1,48 +1,37 @@
+import React from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
-} from 'react-native'
-import React, { useState } from 'react'
+  View,
+} from 'react-native';
 
-import Heart from '../assets/icons/heart.svg'
-
-const CustomButton = ({ title, onPress, loading, icon }) => {
-  const [iconColor, setIconColor] = useState('black')
-
-  const handlePress = () => {
-    setIconColor(iconColor === 'black' ? 'red' : 'black')
-    onPress && onPress()
-  }
-
+const Button = ({title, onPress, loading}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.button}
-        onPress={handlePress}
+        onPress={onPress}
         disabled={loading}>
         {loading ? (
           <ActivityIndicator size="small" />
-        ) : icon ? (
-          <Heart fill={iconColor} width={24} height={24} /> 
         ) : (
           <Text style={styles.buttonText}>{title}</Text>
         )}
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
-export default CustomButton
+export default Button;
 
 const styles = StyleSheet.create({
   container: {
     height: 100,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   button: {
     backgroundColor: 'white',
@@ -51,11 +40,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 45
+    borderRadius: 45,
   },
   buttonText: {
     color: 'black',
     fontSize: 16,
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+});
