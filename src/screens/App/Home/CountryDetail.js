@@ -14,9 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {addFavorite} from '../../../redux/slice';
 
-
 import TopMenu from '../../../components/TopMenu';
-import CustomButton from '../../../components/Button';
 
 const ContryDetailPage = ({route}) => {
   const {place} = route.params;
@@ -51,7 +49,10 @@ const ContryDetailPage = ({route}) => {
         </View>
 
         <Text style={styles.contentText}>{place.content}</Text>
-        <CustomButton title='Sohbet odasına git' />
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Sohbet odasına git</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -83,5 +84,19 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 10,
     resizeMode: 'center',
+  },
+  button: {
+    backgroundColor: 'white',
+    width: 'auto',
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    margin: 10,
+  },
+  buttonText: {
+    fontWeight: '700',
+    fontSize: 20,
+    color: 'black',
   },
 });
