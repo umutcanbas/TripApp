@@ -35,7 +35,6 @@ const AppNavigator = () => {
         tabBarStyle: {
           backgroundColor: '#6a5acd',
           borderTopWidth: 1,
-          paddingTop:5
         },
 
         tabBarIcon: ({focused}) => {
@@ -60,8 +59,6 @@ const AppNavigator = () => {
 };
 
 export default AppNavigator;
-
-
 
 /* import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
