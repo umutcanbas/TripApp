@@ -17,9 +17,10 @@ import Heart from '../../../assets/icons/heart.svg';
 import {useDispatch} from 'react-redux';
 import {addFavorite} from '../../../redux/slice';
 import {useSelector} from 'react-redux';
+import TopMenu from '../../../components/TopMenu';
 
 const ContryDetailPage = ({route}) => {
-  const {country, placeInfo, placeUrl} = route.params;
+  const {place} = route.params;
 
   const navigation = useNavigation();
 
@@ -27,28 +28,19 @@ const ContryDetailPage = ({route}) => {
 
   const favoriteList = useSelector(state => state.slice.favorites);
 
-  console.log(favoriteList);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.button}
-          activeOpacity={0.8}>
-          <BackArrow width={24} height={24} />
-        </TouchableOpacity>
-
-        <Text style={styles.headerText}>{country}</Text>
-        {/* ? */}
-        <TouchableOpacity onPress={() => dispatch(addFavorite({placeInfo}))}>
-          <Heart width={26} height={26} />
-        </TouchableOpacity>
-      </View>
+      <TopMenu
+        title={place.name}
+        onPressLeft={() => navigation.goBack()}
+        onPressRight={() => dispatch(addFavorite({placeInfo}))}
+        rightIcon="heart"
+      />
 
       <View style={styles.imageContainer}>
-        {placeUrl ? (
-          <Image source={{uri: placeUrl}} style={styles.image} />
+        {place.url ? (
+          <Image source={{uri: place.url}} style={styles.image} />
         ) : (
           <Image
             source={{
@@ -60,7 +52,7 @@ const ContryDetailPage = ({route}) => {
       </View>
 
       <ScrollView style={styles.contentContainer}>
-        <Text style={styles.contentText}>{placeInfo.detay}</Text>
+        <Text style={styles.contentText}>{place.content}</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -73,26 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#6a5acd',
   },
-  headerContainer: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    justifyContent: 'space-between',
-    marginHorizontal: 10,
-  },
-  headerText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 34,
-  },
-  button: {
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 30,
-    height: 30,
-    borderRadius: 30,
-    marginLeft: 10,
-  },
+
   contentContainer: {
     padding: 10,
     marginTop: 10,

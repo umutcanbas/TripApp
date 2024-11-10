@@ -11,7 +11,7 @@ const ContinentesCard = () => {
   const [continentData, setContinentData] = useState(null);
 
   const getContinentData = () => {
-    const databaseRef = database().ref('/Kıtalar');
+    const databaseRef = database().ref();
 
     databaseRef
       .once('value')
@@ -27,36 +27,31 @@ const ContinentesCard = () => {
     getContinentData();
   }, []);
 
-  const goContinent = continentName => {
+  const goContinent = continentKey => {
     navigation.navigate(routes.HOME_NAVIGATOR, {
       screen: routes.CONTINENT_PAGE,
       params: {
-        continentName,
-        continentInfo: continentData[continentName],
+        continent: continentData[continentKey],
       },
-    }); 
+    });
   };
 
   const Continentes = () => {
-    return (
-      continentData &&
-      Object.keys(continentData).map((continentName, index) => (
-        <TouchableOpacity
-          onPress={() => goContinent(continentName)}
-          key={index}
-          activeOpacity={0.8}
-          style={styles.renderContainer}>
-          <Text style={styles.renderContainerText}>{continentName}</Text>
-        </TouchableOpacity>
-      ))
-    );
+    return Object.keys(continentData).map((continentKey, index) => (
+      <TouchableOpacity
+        onPress={() => goContinent(continentKey)}
+        key={index}
+        activeOpacity={0.8}
+        style={styles.renderContainer}>
+        <Text style={styles.renderContainerText}>
+          {continentData[continentKey].continent}
+        </Text>
+      </TouchableOpacity>
+    ));
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Nereye seyahat etmek istersin?</Text>
-      </View>
       <View>{continentData && <Continentes />}</View>
     </View>
   );
@@ -67,15 +62,6 @@ export default ContinentesCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  headerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 34,
   },
   renderContainer: {
     justifyContent: 'center',
