@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 
-import BackArrow from '../../../assets/icons/back.svg';
+
 import routes from '../../../navigation/routes';
 import TopMenu from '../../../components/TopMenu';
 
