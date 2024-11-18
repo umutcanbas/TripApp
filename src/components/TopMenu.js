@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
 import BackArrow from '../assets/icons/back.svg';
-import FavoriteIcon from '../assets/icons/heart.svg';
+import FavoriteIcon from '../assets/icons/heart-fill.svg';
 
 const TopMenu = ({
   title,
@@ -14,6 +14,7 @@ const TopMenu = ({
   const icons = {
     back: <BackArrow width={24} height={24} />,
     heart: <FavoriteIcon width={24} height={24} />,
+    heartRed: <FavoriteIcon width={24} height={24} fill="red" />,
   };
   return (
     <View style={styles.container}>
