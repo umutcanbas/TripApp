@@ -7,7 +7,7 @@ import {
   View,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import TopMenu from '../../../components/TopMenu';
 
@@ -18,12 +18,26 @@ import {useDispatch, useSelector} from 'react-redux';
 import {changeFavoriteList} from '../../../redux/slice';
 
 const ContryDetailPage = ({route}) => {
+  const [isfavorite, setIsFavorite] = useState(false);
+
   const {place} = route.params;
-  console.log(place);
 
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
+
+  const favoriteList = useSelector(state => state.slice.favoriteList);
+
+  useEffect(() => {
+    if (favoriteList && place) {
+      const favoriteItem = favoriteList.find(item => item.id === place.id);
+      if (favoriteItem) {
+        setIsFavorite(true);
+      } else {
+        setIsFavorite(false);
+      }
+    }
+  }, [favoriteList, place]);
 
   const addFavorite = place => {
     if (!place) {
@@ -66,7 +80,7 @@ const ContryDetailPage = ({route}) => {
         title={place.name}
         onPressLeft={() => navigation.goBack()}
         onPressRight={() => addFavorite(place)}
-        rightIcon="heart"
+        rightIcon={isfavorite ? 'heartRed' : 'heart'}
       />
 
       {place && <Place />}
