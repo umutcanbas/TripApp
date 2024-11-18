@@ -19,13 +19,11 @@ import {changeFavoriteList} from '../../../redux/slice';
 
 const ContryDetailPage = ({route}) => {
   const {place} = route.params;
+  console.log(place);
 
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
-
-  const favoriteList = useSelector(state => state.slice.favoriteList);
-  console.log('Redux Favorite List:', favoriteList);
 
   const addFavorite = place => {
     if (!place) {
