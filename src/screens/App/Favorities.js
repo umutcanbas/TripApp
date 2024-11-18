@@ -24,15 +24,6 @@ const Favorities = () => {
 
   const favoriteList = useSelector(state => state.slice.favoriteList);
 
-  const handleClearFavorites = () => {
-    dispatch(clearFavorites());
-    console.log('Tüm favoriler silindi!');
-  };
-
-  const handleChangeFavoriteList = (place) => {
-    dispatch(changeFavoriteList(place));
-  };
-
   const FavoriteList = () => {
     return (
       <ScrollView style={styles.container}>
@@ -49,7 +40,6 @@ const Favorities = () => {
                 })
               }
               style={styles.itemContainer}>
-
               <Text
                 numberOfLines={1}
                 ellipsizeMode="tail"
@@ -62,7 +52,6 @@ const Favorities = () => {
                 style={styles.iconContainer}>
                 <Heart width={23} height={23} fill={'red'} />
               </TouchableOpacity>
-
             </TouchableOpacity>
           ))
         ) : (
@@ -70,6 +59,15 @@ const Favorities = () => {
         )}
       </ScrollView>
     );
+  };
+
+  const handleClearFavorites = () => {
+    dispatch(clearFavorites());
+    console.log('Tüm favoriler silindi!');
+  };
+
+  const handleChangeFavoriteList = place => {
+    dispatch(changeFavoriteList(place));
   };
 
   return (
