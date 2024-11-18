@@ -1,6 +1,5 @@
 import {
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -79,7 +78,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#6a5acd',
   },
-
   renderContainer: {
     marginVertical: 10,
     marginTop: 20,
