@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
   renderContainerButton: {
-    backgroundColor: '#add8e6',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     margin: 20,
@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
   renderContainerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#663399',
+    color: 'black',
   },
 });
