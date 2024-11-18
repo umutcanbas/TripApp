@@ -1,40 +1,52 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { MMKV } from 'react-native-mmkv'
+import {createSlice} from '@reduxjs/toolkit';
+import {MMKV} from 'react-native-mmkv';
 
-const storage = new MMKV()
-const isLogged = storage.getBoolean('isLogged')
-const storedFavorites = storage.getString('favorites') // Favorileri saklamak için yeni alan
+const storage = new MMKV();
+
+const isLogged = storage.getBoolean('isLogged');
+
+const favoriteListStorage = storage.getString('favoriteList');
+const favoriteList = favoriteListStorage && JSON.parse(favoriteListStorage);
 
 const initialState = {
   isLogged: isLogged || false,
-  favorites: storedFavorites ? JSON.parse(storedFavorites) : [] // Favoriler dizisi
-}
+  favoriteList: favoriteList || [],
+};
 
 const slice = createSlice({
   name: 'slice',
   initialState,
   reducers: {
     login: state => {
-      state.isLogged = true
-      storage.set('isLogged', state.isLogged)
+      state.isLogged = true;
+      storage.set('isLogged', state.isLogged);
     },
     logout: state => {
-      state.isLogged = false
-      storage.set('isLogged', state.isLogged)
+      state.isLogged = false;
+      storage.set('isLogged', state.isLogged);
     },
-    addFavorite: (state, action) => {
-      state.favorites.push(action.payload)
-      storage.set('favorites', JSON.stringify(state.favorites)) // Favorileri güncelle
+    clearFavorites: state => {
+      state.favoriteList = [];
+      storage.set('favoriteList', JSON.stringify(state.favoriteList));
     },
-    removeFavorite: (state, action) => {
-      state.favorites = state.favorites.filter(
-        favorite => favorite !== action.payload
-      )
-      storage.set('favorites', JSON.stringify(state.favorites)) // Favorileri güncelle
-    }
-  }
-})
+    changeFavoriteList: (state, action) => {
+      const place = action.payload;
+      const isFavorite = state.favoriteList.find(item => item.id === place.id);
 
-export const { login, logout, addFavorite, removeFavorite } = slice.actions
+      if (isFavorite) {
+        state.favoriteList = state.favoriteList.filter(
+          item => item.id !== place.id,
+        );
+      } else {
+        state.favoriteList.push(place);
+      }
 
-export default slice.reducer
+      storage.set('favoriteList', JSON.stringify(state.favoriteList)); 
+    },
+  },
+});
+
+export const {login, logout, addFavorite, removeFavorite, clearFavorites} =
+  slice.actions;
+
+export default slice.reducer;
