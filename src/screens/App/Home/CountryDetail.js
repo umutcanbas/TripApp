@@ -35,6 +35,33 @@ const ContryDetailPage = ({route}) => {
     dispatch(changeFavoriteList(place));
   };
 
+  const Place = () => {
+    return (
+      <>
+        <ScrollView style={styles.contentContainer}>
+          <View style={styles.imageContainer}>
+            {place.url ? (
+              <Image source={{uri: place.url}} style={styles.image} />
+            ) : (
+              <Image
+                source={{
+                  uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Fuji_Kawaguchi_357.JPG/2560px-Fuji_Kawaguchi_357.JPG',
+                }}
+                style={styles.image}
+              />
+            )}
+          </View>
+
+          <Text style={styles.contentText}>{place.content}</Text>
+
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Sohbet odasına git</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <TopMenu
@@ -44,26 +71,7 @@ const ContryDetailPage = ({route}) => {
         rightIcon="heart"
       />
 
-      <ScrollView style={styles.contentContainer}>
-        <View style={styles.imageContainer}>
-          {place.url ? (
-            <Image source={{uri: place.url}} style={styles.image} />
-          ) : (
-            <Image
-              source={{
-                uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Fuji_Kawaguchi_357.JPG/2560px-Fuji_Kawaguchi_357.JPG',
-              }}
-              style={styles.image}
-            />
-          )}
-        </View>
-
-        <Text style={styles.contentText}>{place.content}</Text>
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Sohbet odasına git</Text>
-        </TouchableOpacity>
-      </ScrollView>
+      {place && <Place />}
     </SafeAreaView>
   );
 };

@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import React from 'react';
 
-
 import routes from '../../../navigation/routes';
 import TopMenu from '../../../components/TopMenu';
 
@@ -68,7 +67,7 @@ const ContinentPage = ({route, navigation}) => {
         onPressLeft={() => navigation.goBack()}
       />
 
-      <ScrollView>{continent && <Countries />}</ScrollView>
+      {continent && <Countries />}
     </SafeAreaView>
   );
 };
