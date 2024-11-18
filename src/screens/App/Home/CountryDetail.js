@@ -9,12 +9,13 @@ import {
 } from 'react-native';
 import React from 'react';
 
+import TopMenu from '../../../components/TopMenu';
+
 import {useNavigation} from '@react-navigation/native';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {addFavorite} from '../../../redux/slice';
 
-import TopMenu from '../../../components/TopMenu';
+import {changeFavoriteList} from '../../../redux/slice';
 
 const ContryDetailPage = ({route}) => {
   const {place} = route.params;
@@ -23,14 +24,23 @@ const ContryDetailPage = ({route}) => {
 
   const dispatch = useDispatch();
 
-  const favoriteList = useSelector(state => state.slice.favorites);
+  const favoriteList = useSelector(state => state.slice.favoriteList);
+  console.log('Redux Favorite List:', favoriteList);
+
+  const addFavorite = place => {
+    if (!place) {
+      console.error('Hatalı veya boş place!');
+      return;
+    }
+    dispatch(changeFavoriteList(place));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <TopMenu
         title={place.name}
         onPressLeft={() => navigation.goBack()}
-        onPressRight={() => {}}
+        onPressRight={() => addFavorite(place)}
         rightIcon="heart"
       />
 
