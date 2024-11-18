@@ -31,6 +31,12 @@ const slice = createSlice({
     },
     changeFavoriteList: (state, action) => {
       const place = action.payload;
+
+      if (!place || !place.id) {
+        console.error('Geçersiz place:', place);
+        return;
+      }
+
       const isFavorite = state.favoriteList.find(item => item.id === place.id);
 
       if (isFavorite) {
@@ -41,12 +47,18 @@ const slice = createSlice({
         state.favoriteList.push(place);
       }
 
-      storage.set('favoriteList', JSON.stringify(state.favoriteList)); 
+      storage.set('favoriteList', JSON.stringify(state.favoriteList));
     },
   },
 });
 
-export const {login, logout, addFavorite, removeFavorite, clearFavorites} =
-  slice.actions;
+export const {
+  login,
+  logout,
+  addFavorite,
+  removeFavorite,
+  clearFavorites,
+  changeFavoriteList,
+} = slice.actions;
 
 export default slice.reducer;
