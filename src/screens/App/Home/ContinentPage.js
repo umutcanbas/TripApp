@@ -24,8 +24,13 @@ const ContinentPage = ({route, navigation}) => {
     });
   };
 
-  const Countries = () => {
-    return (
+  return (
+    <SafeAreaView style={styles.container}>
+      <TopMenu
+        title={continent.continent}
+        onPressLeft={() => navigation.goBack()}
+      />
+
       <View style={styles.renderContainer}>
         {Object.keys(country).map((counrtyKey, idx) => {
           const currentCountry = country[counrtyKey];
@@ -56,17 +61,6 @@ const ContinentPage = ({route, navigation}) => {
           );
         })}
       </View>
-    );
-  };
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <TopMenu
-        title={continent.continent}
-        onPressLeft={() => navigation.goBack()}
-      />
-
-      {continent && <Countries />}
     </SafeAreaView>
   );
 };

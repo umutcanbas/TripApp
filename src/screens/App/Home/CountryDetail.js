@@ -7,7 +7,7 @@ import {
   View,
   Image,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 import TopMenu from '../../../components/TopMenu';
 
@@ -18,8 +18,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {changeFavoriteList} from '../../../redux/slice';
 
 const ContryDetailPage = ({route}) => {
-  const [isfavorite, setIsFavorite] = useState(false);
-
   const {place} = route.params;
 
   const navigation = useNavigation();
@@ -28,16 +26,7 @@ const ContryDetailPage = ({route}) => {
 
   const favoriteList = useSelector(state => state.slice.favoriteList);
 
-  useEffect(() => {
-    if (favoriteList && place) {
-      const favoriteItem = favoriteList.find(item => item.id === place.id);
-      if (favoriteItem) {
-        setIsFavorite(true);
-      } else {
-        setIsFavorite(false);
-      }
-    }
-  }, [favoriteList, place]);
+  const isfavorite = favoriteList.find(item => item.id === place.id);
 
   const addFavorite = place => {
     if (!place) {
@@ -47,35 +36,9 @@ const ContryDetailPage = ({route}) => {
     dispatch(changeFavoriteList(place));
   };
 
-  const Place = () => {
-    return (
-      <>
-        <ScrollView style={styles.contentContainer}>
-          <View style={styles.imageContainer}>
-            {place.url ? (
-              <Image source={{uri: place.url}} style={styles.image} />
-            ) : (
-              <Image
-                source={{
-                  uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Fuji_Kawaguchi_357.JPG/2560px-Fuji_Kawaguchi_357.JPG',
-                }}
-                style={styles.image}
-              />
-            )}
-          </View>
-
-          <Text style={styles.contentText}>{place.content}</Text>
-
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Sohbet odasına git</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </>
-    );
-  };
-
   return (
     <SafeAreaView style={styles.container}>
+     
       <TopMenu
         title={place.name}
         onPressLeft={() => navigation.goBack()}
@@ -83,7 +46,26 @@ const ContryDetailPage = ({route}) => {
         rightIcon={isfavorite ? 'heartRed' : 'heart'}
       />
 
-      {place && <Place />}
+      <ScrollView style={styles.contentContainer}>
+        <View style={styles.imageContainer}>
+          {place.url ? (
+            <Image source={{uri: place.url}} style={styles.image} />
+          ) : (
+            <Image
+              source={{
+                uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Fuji_Kawaguchi_357.JPG/2560px-Fuji_Kawaguchi_357.JPG',
+              }}
+              style={styles.image}
+            />
+          )}
+        </View>
+
+        <Text style={styles.contentText}>{place.content}</Text>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Sohbet odasına git</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </SafeAreaView>
   );
 };

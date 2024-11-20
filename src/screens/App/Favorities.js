@@ -1,10 +1,10 @@
 import {
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  ActionSheetIOS,
 } from 'react-native';
 import React from 'react';
 
@@ -24,8 +24,44 @@ const Favorities = () => {
 
   const favoriteList = useSelector(state => state.slice.favoriteList);
 
-  const FavoriteList = () => {
-    return (
+  const handleClearFavorites = () => {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: ['İptal', 'Hepsini Sil'],
+        destructiveButtonIndex: 1,
+        cancelButtonIndex: 0,
+        userInterfaceStyle: 'dark',
+      },
+      buttonIndex => {
+        if (buttonIndex === 1) {
+          dispatch(clearFavorites());
+          console.log('Tüm favoriler silindi!');
+        }
+      },
+    );
+  };
+
+  const handleChangeFavoriteList = place => {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: ['İptal', 'Sil'],
+        destructiveButtonIndex: 1,
+        cancelButtonIndex: 0,
+        userInterfaceStyle: 'dark',
+      },
+      buttonIndex => {
+        if (buttonIndex === 1) {
+          dispatch(changeFavoriteList(place));
+          console.log('Favori silindi!');
+        }
+      },
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <TopMenu title="Favorites" />
+
       <ScrollView style={styles.container}>
         {favoriteList && favoriteList.length > 0 ? (
           favoriteList.map((place, index) => (
@@ -55,31 +91,14 @@ const Favorities = () => {
             </TouchableOpacity>
           ))
         ) : (
-          <Text style={styles.noFavoritesText}>No favorites found.</Text>
+          <Text style={styles.noFavoritesText}>Favori bulunamadı.</Text>
         )}
       </ScrollView>
-    );
-  };
-
-  const handleClearFavorites = () => {
-    dispatch(clearFavorites());
-    console.log('Tüm favoriler silindi!');
-  };
-
-  const handleChangeFavoriteList = place => {
-    dispatch(changeFavoriteList(place));
-  };
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <TopMenu title="Favorites" />
-
-      <FavoriteList />
 
       <TouchableOpacity
         style={styles.button}
         onPress={() => handleClearFavorites()}>
-        <Text style={styles.buttonText}>Clear Favorites</Text>
+        <Text style={styles.buttonText}>Hepsini sil</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
