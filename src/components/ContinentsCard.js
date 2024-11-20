@@ -39,17 +39,18 @@ const ContinentesCard = () => {
   return (
     <View style={styles.container}>
       <View>
-        {Object.keys(continentData).map((continentKey, index) => (
-          <TouchableOpacity
-            onPress={() => goContinent(continentKey)}
-            key={index}
-            activeOpacity={0.8}
-            style={styles.renderContainer}>
-            <Text style={styles.renderContainerText}>
-              {continentData[continentKey].continent}
-            </Text>
-          </TouchableOpacity>
-        ))}
+        {continentData &&
+          Object.keys(continentData).map((continentKey, index) => (
+            <TouchableOpacity
+              onPress={() => goContinent(continentKey)}
+              key={index}
+              activeOpacity={0.8}
+              style={styles.renderContainer}>
+              <Text style={styles.renderContainerText}>
+                {continentData[continentKey].continent}
+              </Text>
+            </TouchableOpacity>
+          ))}
       </View>
     </View>
   );

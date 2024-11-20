@@ -18,6 +18,7 @@ import {clearFavorites, changeFavoriteList} from '../../redux/slice';
 import {useNavigation} from '@react-navigation/native';
 import routes from '../../navigation/routes';
 
+
 const Favorities = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -62,7 +63,7 @@ const Favorities = () => {
     <SafeAreaView style={styles.container}>
       <TopMenu title="Favorites" />
 
-      <ScrollView style={styles.container}>
+      <ScrollView>
         {favoriteList && favoriteList.length > 0 ? (
           favoriteList.map((place, index) => (
             <TouchableOpacity
@@ -93,13 +94,12 @@ const Favorities = () => {
         ) : (
           <Text style={styles.noFavoritesText}>Favori bulunamadı.</Text>
         )}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handleClearFavorites()}>
+          <Text style={styles.buttonText}>Hepsini sil</Text>
+        </TouchableOpacity>
       </ScrollView>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => handleClearFavorites()}>
-        <Text style={styles.buttonText}>Hepsini sil</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -138,16 +138,16 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#b0a6d2',
-    position: 'absolute',
-    bottom: 10,
-    right: 125,
     width: 150,
     height: 40,
     borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderColor: 'red',
     borderWidth: 2,
+    marginTop: 100,
+    marginBottom: 20,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
     color: 'black',
