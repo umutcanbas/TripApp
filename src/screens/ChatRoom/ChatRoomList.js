@@ -1,14 +1,23 @@
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import TopMenu from '../../components/TopMenu';
 
 import database from '@react-native-firebase/database';
 
+import {useNavigation} from '@react-navigation/native';
+import routes from '../../navigation/routes';
+
 const ChatRoomList = () => {
   const [chatRoomList, setChatRoomList] = useState();
 
-  console.log(chatRoomList);
+  const navigation = useNavigation();
 
   const getChatRoomList = async () => {
     try {
@@ -30,17 +39,26 @@ const ChatRoomList = () => {
     getChatRoomList();
   }, []);
 
+  const goChatRoom = place => {
+    navigation.navigate(routes.CHAT_NAVIGATOR, {
+      screen: routes.CHATROOMS,
+      params: place,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <TopMenu title="Sohbet Odaları" />
       {chatRoomList ? (
-        
         Object.keys(chatRoomList).map(chatRoomKey => {
           const chatRoom = chatRoomList[chatRoomKey];
           return Object.keys(chatRoom).map(subKey => {
             const place = chatRoom[subKey];
             return (
-              <TouchableOpacity key={subKey} style={styles.button}>
+              <TouchableOpacity
+                key={subKey}
+                style={styles.button}
+                onPress={() => goChatRoom(place)}>
                 <Text style={styles.butttonText}>{place.placeName}</Text>
               </TouchableOpacity>
             );
@@ -62,22 +80,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#6a5acd',
   },
-  button:{
+  button: {
     padding: 10,
     margin: 10,
     backgroundColor: '#f0f0f0',
     borderRadius: 5,
-    alignItems:'center'
+    alignItems: 'center',
   },
-  butttonText:{
-    fontSize:22,
-    color:'black',
-    fontWeight:'bold'
+  butttonText: {
+    fontSize: 22,
+    color: 'black',
+    fontWeight: 'bold',
   },
-  emptyText:{
-    fontSize:22,
-    color:'white',
-    fontWeight:'bold',
-    textAlign:'center',
-  }
+  emptyText: {
+    fontSize: 22,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
