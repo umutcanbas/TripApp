@@ -11,7 +11,7 @@ const ContinentesCard = () => {
   const [continentData, setContinentData] = useState(null);
 
   const getContinentData = () => {
-    const databaseRef = database().ref();
+    const databaseRef = database().ref('/kıtalar');
 
     databaseRef
       .once('value')
