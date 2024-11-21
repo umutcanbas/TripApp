@@ -5,6 +5,7 @@ import routes from './routes';
 
 import HomeNavigator from './HomeNavigator';
 import Favorities from '../screens/App/Favorities';
+import ChatNavigator from './ChatNavigator';
 
 import Home from '../assets/icons/home.svg';
 import HomeFill from '../assets/icons/home-fill.svg';
@@ -12,7 +13,7 @@ import HeartFill from '../assets/icons/heart-fill.svg';
 import Heart from '../assets/icons/heart.svg';
 import ChatRoom from '../assets/icons/list-line.svg';
 import ChatRoomFill from '../assets/icons/list-fill.svg';
-import ChatRoomList from '../screens/ChatRoom/ChatRoomList';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +45,7 @@ const AppNavigator = () => {
             IconComponent = focused ? iconList.homeFill : iconList.home;
           } else if (route.name === routes.FAVORITIES) {
             IconComponent = focused ? iconList.heartFill : iconList.heart;
-          } else if (route.name === routes.CHATLIST) {
+          } else if (route.name === routes.CHAT_NAVIGATOR) {
             IconComponent = focused ? iconList.chatRoomFill : iconList.chatRoom;
           }
 
@@ -52,7 +53,7 @@ const AppNavigator = () => {
         },
       })}>
       <Tab.Screen name={routes.HOME_NAVIGATOR} component={HomeNavigator} />
-      <Tab.Screen name={routes.CHATLIST} component={ChatRoomList} />
+      <Tab.Screen name={routes.CHAT_NAVIGATOR} component={ChatNavigator} />
       <Tab.Screen name={routes.FAVORITIES} component={Favorities} />
     </Tab.Navigator>
   );
