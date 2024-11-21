@@ -17,6 +17,10 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {changeFavoriteList} from '../../../redux/slice';
 
+import database from '@react-native-firebase/database';
+
+import routes from '../../../navigation/routes';
+
 const ContryDetailPage = ({route}) => {
   const {place} = route.params;
 
@@ -36,9 +40,17 @@ const ContryDetailPage = ({route}) => {
     dispatch(changeFavoriteList(place));
   };
 
+  const goChatRoom = () => {
+    const databaseRef = database().ref(`/chatRooms/${place.id}`);
+    databaseRef.push({placeName: place.name});
+    navigation.navigate(routes.APP_NAVIGATOR, {
+      screen: routes.CHATROOMS,
+      params: place.name,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-     
       <TopMenu
         title={place.name}
         onPressLeft={() => navigation.goBack()}
@@ -62,7 +74,7 @@ const ContryDetailPage = ({route}) => {
 
         <Text style={styles.contentText}>{place.content}</Text>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={goChatRoom} style={styles.button}>
           <Text style={styles.buttonText}>Sohbet odasına git</Text>
         </TouchableOpacity>
       </ScrollView>
