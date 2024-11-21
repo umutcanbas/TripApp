@@ -4,6 +4,8 @@ import React from 'react';
 import BackArrow from '../assets/icons/back.svg';
 import FavoriteIcon from '../assets/icons/heart-fill.svg';
 
+import { useNavigation } from '@react-navigation/native';
+
 const TopMenu = ({
   title,
   onPressLeft,
@@ -16,12 +18,13 @@ const TopMenu = ({
     heart: <FavoriteIcon width={24} height={24} />,
     heartRed: <FavoriteIcon width={24} height={24} fill="red" />,
   };
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         {onPressLeft && (
           <TouchableOpacity
-            onPress={onPressLeft}
+            onPress={navigation.goBack}
             style={styles.leftButtonContainer}
             activeOpacity={0.8}>
             {icons[leftIcon]}
