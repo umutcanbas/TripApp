@@ -9,7 +9,8 @@ export const routes = {
   CONTINENT_PAGE:'ContinentPage',
   COUNTRY_DETAIL:'CountryDetail',
   FAVORITIES:'Favorities',
-  CHATROOMS:'ChatRooms'
+  CHATROOMS:'ChatRooms',
+  CHATLIST :'ChatList',
 };
 
 export default routes

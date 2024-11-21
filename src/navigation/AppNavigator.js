@@ -4,7 +4,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import routes from './routes';
 
 import HomeNavigator from './HomeNavigator';
-import ChatRooms from '../screens/App/ChatRooms';
 import Favorities from '../screens/App/Favorities';
 
 import Home from '../assets/icons/home.svg';
@@ -13,6 +12,7 @@ import HeartFill from '../assets/icons/heart-fill.svg';
 import Heart from '../assets/icons/heart.svg';
 import ChatRoom from '../assets/icons/list-line.svg';
 import ChatRoomFill from '../assets/icons/list-fill.svg';
+import ChatRoomList from '../screens/ChatRoom/ChatRoomList';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +44,7 @@ const AppNavigator = () => {
             IconComponent = focused ? iconList.homeFill : iconList.home;
           } else if (route.name === routes.FAVORITIES) {
             IconComponent = focused ? iconList.heartFill : iconList.heart;
-          } else if (route.name === routes.CHATROOMS) {
+          } else if (route.name === routes.CHATLIST) {
             IconComponent = focused ? iconList.chatRoomFill : iconList.chatRoom;
           }
 
@@ -52,7 +52,7 @@ const AppNavigator = () => {
         },
       })}>
       <Tab.Screen name={routes.HOME_NAVIGATOR} component={HomeNavigator} />
-      <Tab.Screen name={routes.CHATROOMS} component={ChatRooms} />
+      <Tab.Screen name={routes.CHATLIST} component={ChatRoomList} />
       <Tab.Screen name={routes.FAVORITIES} component={Favorities} />
     </Tab.Navigator>
   );

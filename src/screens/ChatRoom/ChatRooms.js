@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
+import ChatRoomList from './ChatRoomList';
+
 const ChatRooms = () => {
+
   return (
-    <View>
-      <Text>ChatRooms</Text>
-    </View>
+    <ChatRoomList />
   )
 }
 
