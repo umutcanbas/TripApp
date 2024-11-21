@@ -61,7 +61,7 @@ const Favorities = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopMenu title="Favorites" />
+      <TopMenu title="Favori Seyehat Yerleri" />
 
       <ScrollView>
         {favoriteList && favoriteList.length > 0 ? (
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'red',
     borderWidth: 2,
-    marginTop: 100,
+    marginTop: 50,
     marginBottom: 20,
     alignSelf: 'center',
     alignItems: 'center',
