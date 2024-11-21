@@ -52,7 +52,7 @@ const ContryDetailPage = ({route}) => {
           params: place.name,
         });
       } else {
-        await databaseRef.push({placeName: place.name});
+        await databaseRef.push({placeId: place.id , placeName: place.name});
 
         navigation.navigate(routes.CHAT_NAVIGATOR, {
           screen: routes.CHATROOMS,
