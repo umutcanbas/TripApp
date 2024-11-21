@@ -28,7 +28,7 @@ const ContinentPage = ({route, navigation}) => {
     <SafeAreaView style={styles.container}>
       <TopMenu
         title={continent.continent}
-        onPressLeft={() => navigation.goBack()}
+        onPressLeft
       />
 
       <View style={styles.renderContainer}>

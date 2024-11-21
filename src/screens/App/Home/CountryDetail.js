@@ -68,7 +68,7 @@ const ContryDetailPage = ({route}) => {
     <SafeAreaView style={styles.container}>
       <TopMenu
         title={place.name}
-        onPressLeft={() => navigation.goBack()}
+        onPressLeft
         onPressRight={() => addFavorite(place)}
         rightIcon={isfavorite ? 'heartRed' : 'heart'}
       />
