@@ -40,13 +40,28 @@ const ContryDetailPage = ({route}) => {
     dispatch(changeFavoriteList(place));
   };
 
-  const goChatRoom = () => {
+  const goChatRoom = async () => {
     const databaseRef = database().ref(`/chatRooms/${place.id}`);
-    databaseRef.push({placeName: place.name});
-    navigation.navigate(routes.APP_NAVIGATOR, {
-      screen: routes.CHATROOMS,
-      params: place.name,
-    });
+
+    try {
+      const snapshot = await databaseRef.once('value');
+      
+      if (snapshot.exists()) {
+        navigation.navigate(routes.CHAT_NAVIGATOR, {
+          screen: routes.CHATROOMS,
+          params: place.name,
+        });
+      } else {
+        await databaseRef.push({placeName: place.name});
+
+        navigation.navigate(routes.CHAT_NAVIGATOR, {
+          screen: routes.CHATROOMS,
+          params: place.name,
+        });
+      }
+    } catch (err) {
+      console.log('Hata:', err);
+    }
   };
 
   return (
