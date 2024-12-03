@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import routes from './routes';
 
 import ChatRoomList from '../screens/ChatRoom/ChatRoomList';
-import ChatRooms from '../screens/ChatRoom/ChatRooms';
+import ChatRooms from '../screens/ChatRoom/ChatRoom';
 
 const Stack = createNativeStackNavigator();
 

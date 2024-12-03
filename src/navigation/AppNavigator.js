@@ -14,7 +14,6 @@ import Heart from '../assets/icons/heart.svg';
 import ChatRoom from '../assets/icons/list-line.svg';
 import ChatRoomFill from '../assets/icons/list-fill.svg';
 
-
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
@@ -53,7 +52,19 @@ const AppNavigator = () => {
         },
       })}>
       <Tab.Screen name={routes.HOME_NAVIGATOR} component={HomeNavigator} />
-      <Tab.Screen name={routes.CHAT_NAVIGATOR} component={ChatNavigator} />
+      <Tab.Screen
+        name={routes.CHAT_NAVIGATOR}
+        component={ChatNavigator}
+        listeners={({navigation}) => ({
+          tabPress: e => {
+            e.preventDefault();
+            navigation.navigate(routes.CHAT_NAVIGATOR, {
+              screen: routes.CHATLIST,
+            });
+          },
+        })}
+      />
+
       <Tab.Screen name={routes.FAVORITIES} component={Favorities} />
     </Tab.Navigator>
   );
