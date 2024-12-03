@@ -49,14 +49,14 @@ const ContryDetailPage = ({route}) => {
       if (snapshot.exists()) {
         navigation.navigate(routes.CHAT_NAVIGATOR, {
           screen: routes.CHATROOMS,
-          params: place.name,
+          params: place,
         });
       } else {
-        await databaseRef.push({placeId: place.id , placeName: place.name});
+         databaseRef.push({id: place.id , name: place.name});
 
         navigation.navigate(routes.CHAT_NAVIGATOR, {
           screen: routes.CHATROOMS,
-          params: place.name,
+          params: place,
         });
       }
     } catch (err) {
