@@ -30,7 +30,7 @@ const Login = ({navigation}) => {
     auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-       dispatch(login()) //içeri parametre giderse obj{} olarak
+       dispatch(login()) 
        console.log('Giriş yapıldı')
 
         navigation.replace(routes.APP_NAVIGATOR);
