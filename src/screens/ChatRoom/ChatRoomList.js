@@ -11,10 +11,12 @@ import TopMenu from '../../components/TopMenu';
 
 import database from '@react-native-firebase/database';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useIsFocused} from '@react-navigation/native';
 import routes from '../../navigation/routes';
 
 const ChatRoomList = () => {
+  const isFocused = useIsFocused();
+
   const [chatRoomList, setChatRoomList] = useState();
 
   const navigation = useNavigation();
@@ -36,8 +38,9 @@ const ChatRoomList = () => {
   };
 
   useEffect(() => {
+    if (!isFocused) return;
     getChatRoomList();
-  }, []);
+  }, [isFocused]);
 
   const goChatRoom = place => {
     navigation.navigate(routes.CHAT_NAVIGATOR, {
@@ -50,19 +53,19 @@ const ChatRoomList = () => {
     <SafeAreaView style={styles.container}>
       <TopMenu title="Sohbet Odaları" />
       {chatRoomList ? (
-        Object.keys(chatRoomList).map(chatRoomKey => {
+        Object.keys(chatRoomList).map((chatRoomKey, index) => {
           const chatRoom = chatRoomList[chatRoomKey];
-          return Object.keys(chatRoom).map(subKey => {
-            const place = chatRoom[subKey];
-            return (
-              <TouchableOpacity
-                key={subKey}
-                style={styles.button}
-                onPress={() => goChatRoom(place)}>
-                <Text style={styles.butttonText}>{place.placeName}</Text>
-              </TouchableOpacity>
-            );
-          });
+          const data = Object.keys(chatRoom).filter(key => key !== 'messages');
+          const room = chatRoom[data];
+
+          return (
+            <TouchableOpacity
+              key={index}
+              style={styles.button}
+              onPress={() => goChatRoom(room)}>
+              <Text style={styles.butttonText}>{room.name}</Text>
+            </TouchableOpacity>
+          );
         })
       ) : (
         <View>
