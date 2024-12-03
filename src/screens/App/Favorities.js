@@ -13,11 +13,10 @@ import TopMenu from '../../components/TopMenu';
 import Heart from '../../assets/icons/heart-fill.svg';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {clearFavorites, changeFavoriteList} from '../../redux/slice';
+import {clearFavorites, changeFavoriteList,logout} from '../../redux/slice';
 
 import {useNavigation} from '@react-navigation/native';
 import routes from '../../navigation/routes';
-
 
 const Favorities = () => {
   const dispatch = useDispatch();
@@ -59,9 +58,18 @@ const Favorities = () => {
     );
   };
 
+  const logOut = () => {
+    dispatch(logout());
+    navigation.replace(routes.AUTH_NAVIGATOR);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <TopMenu title="Favori Seyehat Yerleri" />
+      <TopMenu
+        title="Favori Seyehat Yerleri"
+        rightIcon="profile"
+        onPressRight={logOut}
+      />
 
       <ScrollView>
         {favoriteList && favoriteList.length > 0 ? (
