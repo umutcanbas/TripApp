@@ -1,4 +1,26 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+## Trip App
+<img src='screenshots/ss1.png' height='400' /> <img src='screenshots/ss2.png' height='400' /> <img src='screenshots/ss3.png' height='400' />
+<img src='screenshots/ss4.png' height='400' /> <img src='screenshots/ss5.png' height='400' /> <img src='screenshots/ss6.png' height='400' /> 
+<img src='screenshots/ss7.png' height='400' /> <img src='screenshots/ss8.png' height='400' />
+
+# Technology
+- React Native
+
+# Tools
+
+- React Navigation
+- Redux
+- Redux-Toolkit
+- MMKV
+- Firebase
+
+## Features
+
+- Creating an account and logging with Firebase
+- Listing and displaying continents, listing countries and listing tourist attractions along with their details
+- Adding travel destinations to favorites
+- Creating chat rooms about travel destinations and being able to chat
+
 
 # Getting Started
 
@@ -77,4 +99,4 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# TripApp
+# Trip App
