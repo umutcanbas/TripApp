@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
   input: {
     width: 300,
     color: 'black',
-    marginLeft:10
+    marginLeft: 10,
   },
   icon: {
     padding: 5,
   },
-})
+});

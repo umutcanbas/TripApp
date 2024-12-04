@@ -20,6 +20,7 @@ const TopMenu = ({
     heartRed: <FavoriteIcon width={24} height={24} fill="red" />,
     profile: <Profile width={24} height={24} />,
   };
+
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -35,6 +36,7 @@ const TopMenu = ({
       </View>
 
       <Text style={styles.title}>{title}</Text>
+
       <View style={styles.rightButtonContainer}>
         {onPressRight && (
           <TouchableOpacity onPress={onPressRight}>

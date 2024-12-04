@@ -5,21 +5,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
 import React, {useEffect, useState} from 'react';
 
 import TopMenu from '../../components/TopMenu';
 
 import database from '@react-native-firebase/database';
 
-import {useNavigation, useIsFocused} from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
+
 import routes from '../../navigation/routes';
 
-const ChatRoomList = () => {
+const ChatRoomList = ({navigation}) => {
   const isFocused = useIsFocused();
 
   const [chatRoomList, setChatRoomList] = useState();
-
-  const navigation = useNavigation();
 
   const getChatRoomList = async () => {
     try {

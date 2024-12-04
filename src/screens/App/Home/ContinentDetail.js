@@ -1,5 +1,6 @@
 import {
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,7 +14,7 @@ import TopMenu from '../../../components/TopMenu';
 const ContinentPage = ({route, navigation}) => {
   const {continent} = route.params;
 
-  const country = continent['countries'];
+  const countries = continent['countries'];
 
   const goCountryDetail = place => {
     navigation.navigate(routes.HOME_NAVIGATOR, {
@@ -26,14 +27,11 @@ const ContinentPage = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopMenu
-        title={continent.continent}
-        onPressLeft
-      />
+      <TopMenu title={continent.continent} onPressLeft />
 
-      <View style={styles.renderContainer}>
-        {Object.keys(country).map((counrtyKey, idx) => {
-          const currentCountry = country[counrtyKey];
+      <ScrollView style={styles.renderContainer}>
+        {Object.keys(countries).map((counrtyKey, idx) => {
+          const currentCountry = countries[counrtyKey];
           const places = Object.values(currentCountry.place);
           return (
             <View key={idx}>
@@ -60,7 +58,7 @@ const ContinentPage = ({route, navigation}) => {
             </View>
           );
         })}
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

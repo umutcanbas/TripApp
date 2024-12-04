@@ -9,7 +9,7 @@ import ChatRooms from '../screens/ChatRoom/ChatRoom';
 
 const Stack = createNativeStackNavigator();
 
-const AuthNavigator = () => {
+const ChatNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -23,4 +23,4 @@ const AuthNavigator = () => {
   );
 };
 
-export default AuthNavigator;
+export default ChatNavigator;

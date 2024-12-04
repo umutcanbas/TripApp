@@ -13,14 +13,12 @@ import TopMenu from '../../components/TopMenu';
 import Heart from '../../assets/icons/heart-fill.svg';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {clearFavorites, changeFavoriteList,logout} from '../../redux/slice';
+import {clearFavorites, changeFavoriteList, logout} from '../../redux/slice';
 
-import {useNavigation} from '@react-navigation/native';
 import routes from '../../navigation/routes';
 
-const Favorities = () => {
+const Favorities = ({navigation}) => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   const favoriteList = useSelector(state => state.slice.favoriteList);
 
@@ -102,11 +100,13 @@ const Favorities = () => {
         ) : (
           <Text style={styles.noFavoritesText}>Favori bulunamadı.</Text>
         )}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => handleClearFavorites()}>
-          <Text style={styles.buttonText}>Hepsini sil</Text>
-        </TouchableOpacity>
+        {favoriteList && favoriteList.length > 1 && (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => handleClearFavorites()}>
+            <Text style={styles.buttonText}>Hepsini sil</Text>
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

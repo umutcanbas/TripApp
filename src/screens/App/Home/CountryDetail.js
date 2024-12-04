@@ -11,8 +11,6 @@ import React from 'react';
 
 import TopMenu from '../../../components/TopMenu';
 
-import {useNavigation} from '@react-navigation/native';
-
 import {useDispatch, useSelector} from 'react-redux';
 
 import {changeFavoriteList} from '../../../redux/slice';
@@ -21,10 +19,8 @@ import database from '@react-native-firebase/database';
 
 import routes from '../../../navigation/routes';
 
-const ContryDetailPage = ({route}) => {
+const ContryDetailPage = ({route, navigation}) => {
   const {place} = route.params;
-
-  const navigation = useNavigation();
 
   const dispatch = useDispatch();
 
@@ -45,14 +41,14 @@ const ContryDetailPage = ({route}) => {
 
     try {
       const snapshot = await databaseRef.once('value');
-      
+
       if (snapshot.exists()) {
         navigation.navigate(routes.CHAT_NAVIGATOR, {
           screen: routes.CHATROOMS,
           params: place,
         });
       } else {
-         databaseRef.push({id: place.id , name: place.name});
+        databaseRef.push({id: place.id, name: place.name});
 
         navigation.navigate(routes.CHAT_NAVIGATOR, {
           screen: routes.CHATROOMS,

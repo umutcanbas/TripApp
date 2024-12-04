@@ -1,4 +1,5 @@
 import {
+  KeyboardAvoidingView,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -18,6 +19,7 @@ import {useIsFocused} from '@react-navigation/native';
 
 const ChatRooms = ({route}) => {
   const title = route.params.name;
+
   const placeId = route.params.id;
 
   const [message, setMessage] = useState('');
@@ -98,40 +100,45 @@ const ChatRooms = ({route}) => {
     <SafeAreaView style={styles.container}>
       <TopMenu title={title} onPressLeft />
 
-      <ScrollView style={styles.messageContainer}>
-        {messages
-          .sort((a, b) => a.timestamp - b.timestamp)
-          .map((item, index) => (
-            <View
-              key={index}
-              style={[
-                styles.messageBox,
-                item.sender === userName
-                  ? styles.rightMessage
-                  : styles.leftMessage,
-              ]}>
-              <Text style={styles.senderText}>
-                {item.sender === userName ? userName : item.sender}
-              </Text>
-              <Text style={styles.messageText}>{item.message}</Text>
-            </View>
-          ))}
-      </ScrollView>
+      <KeyboardAvoidingView
+        style={{flex: 1}}
+        keyboardShouldPersistTaps="handled"
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView style={styles.messageContainer}>
+          {messages
+            .sort((a, b) => a.timestamp - b.timestamp)
+            .map((item, index) => (
+              <View
+                key={index}
+                style={[
+                  styles.messageBox,
+                  item.sender === userName
+                    ? styles.rightMessage
+                    : styles.leftMessage,
+                ]}>
+                <Text style={styles.senderText}>
+                  {item.sender === userName ? userName : item.sender}
+                </Text>
+                <Text style={styles.messageText}>{item.message}</Text>
+              </View>
+            ))}
+        </ScrollView>
 
-      <View style={styles.ınputContaier}>
-        <TextInput
-          value={message}
-          onChangeText={setMessage}
-          placeholder="Bir Mesaj Yaz"
-          multiline
-          placeholderTextColor="black"
-          style={styles.ınput}
-        />
+        <View style={styles.inputContaier}>
+          <TextInput
+            value={message}
+            onChangeText={setMessage}
+            placeholder="Bir Mesaj Yaz"
+            multiline
+            placeholderTextColor="black"
+            style={styles.input}
+          />
 
-        <TouchableOpacity style={styles.ınputButton} onPress={sendMessage}>
-          <Text style={styles.ınputButtonText}>Send</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity style={styles.inputButton} onPress={sendMessage}>
+            <Text style={styles.inputButtonText}>Send</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -171,7 +178,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000',
   },
-  ınputContaier: {
+  inputContaier: {
     flexDirection: 'row',
     backgroundColor: '#f8f8ff',
     maxHeight: 500,
@@ -181,11 +188,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  ınput: {
+  input: {
     width: 300,
-    marginLeft: 10,
   },
-  ınputButton: {
+  inputButton: {
     width: 40,
     height: 40,
     padding: 5,
@@ -195,7 +201,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     borderRadius: 20,
   },
-  ınputButtonText: {
+  inputButtonText: {
     color: 'white',
     fontSize: 12,
   },

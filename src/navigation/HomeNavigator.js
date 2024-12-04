@@ -5,12 +5,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import routes from './routes';
 
 import Home from '../screens/App/Home/Home';
-import ContinentPage from '../screens/App/Home/ContinentPage';
+import ContinentPage from '../screens/App/Home/ContinentDetail';
 import CountryDetail from '../screens/App/Home/CountryDetail';
 
 const Stack = createNativeStackNavigator();
 
-const AuthNavigator = () => {
+const HomeNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -24,4 +24,4 @@ const AuthNavigator = () => {
   );
 };
 
-export default AuthNavigator;
+export default HomeNavigator;

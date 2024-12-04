@@ -8,38 +8,30 @@ import routes from '../../navigation/routes';
 
 import auth from '@react-native-firebase/auth';
 
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 
-import { login } from '../../redux/slice';
+import {login} from '../../redux/slice';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-
-  const handleLogin = () => {
-    if (email.trim() === '' || password.trim() === '') {
-      Alert.alert('Error', 'Please enter email and password');
-      return;
+  const handleLogin = async () => {
+    try {
+      
+      await auth().signInWithEmailAndPassword(email, password);
+      await dispatch(login());
+      console.log('Giriş yapıldı');
+      
+      setLoading(false);
+      navigation.replace(routes.APP_NAVIGATOR);
+    } catch (error) {
+      setLoading(false);
+      console.log('HATAA', error);
     }
-    setLoading(true);
-
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-       dispatch(login()) 
-       console.log('Giriş yapıldı')
-
-        navigation.replace(routes.APP_NAVIGATOR);
-      })
-      .catch(error => {
-        console.log('HATAA' , error)
-      })
-      .finally(_ => setLoading(false));
-
   };
 
   const goSingUp = () => {
@@ -60,7 +52,12 @@ const Login = ({navigation}) => {
       />
 
       <View style={styles.buttonContainer}>
-        <CustomButton title="Login" onPress={handleLogin} loading={loading} />
+        <CustomButton
+          title="Login"
+          onPress={handleLogin}
+          loading={loading}
+          isDisabled={email.trim() === '' || password.trim() === ''}
+        />
         <CustomButton title="Register" onPress={goSingUp} />
       </View>
     </SafeAreaView>
