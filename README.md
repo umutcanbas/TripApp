@@ -1,4 +1,4 @@
-## Trip App
+# Trip App
 
 <img src="screenshots/ss1.png" height='400' /> <img src='screenshots/ss2.png' height='400' /> <img src='screenshots/ss3.png' height='400' />
 <img src='screenshots/ss4.png' height='400' /> <img src='screenshots/ss5.png' height='400' /> <img src='screenshots/ss6.png' height='400' /> 
