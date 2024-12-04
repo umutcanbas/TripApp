@@ -22,7 +22,7 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Splash Screen</Text>
+      <Text style={styles.title}>Tripp App</Text>
     </SafeAreaView>
   )
 }
